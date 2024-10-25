@@ -1,0 +1,27 @@
+
+### 5. .gitignore
+
+```gitignore
+# Ignore arquivos e diretórios temporários do sistema
+*.DS_Store
+Thumbs.db
+
+# Ignorar arquivos do MySQL Workbench
+*.sql.bak
+*.log
+*.temp
+
+# Arquivos e diretórios relacionados ao editor de código
+.vscode/
+.idea/
+*.code-workspace
+
+# Arquivos temporários e de backup
+*.bak
+*.tmp
+*.swp
+~$*
+
+# Arquivos de configuração pessoal
+.env
+config.php
