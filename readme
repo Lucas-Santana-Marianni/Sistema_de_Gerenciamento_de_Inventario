@@ -1,0 +1,82 @@
+
+Enunciado do Projeto: Sistema de Gestão de Inventário de Produtos
+Objetivo:
+Desenvolver um sistema para gerenciar o inventário de produtos em um armazém, permitindo o registro, a manutenção e a consulta de informações sobre produtos, categorias e fornecedores. O sistema deve facilitar o gerenciamento das entradas e saídas de produtos, garantindo um controle eficiente do estoque.
+
+Escopo do Projeto:
+
+Cadastro de Categorias:
+
+Permitir o registro de diferentes categorias de produtos, facilitando a organização e a busca de itens no inventário.
+Cadastro de Fornecedores:
+
+Armazenar informações relevantes sobre os fornecedores, incluindo nome e contato, para facilitar a comunicação e o gerenciamento de compras.
+Cadastro de Produtos:
+
+Registrar informações detalhadas sobre os produtos, como nome, descrição, preço, quantidade disponível, categoria e fornecedor.
+Registro de Movimentos:
+
+Implementar a funcionalidade de registrar entradas e saídas de produtos no armazém, permitindo um controle em tempo real do estoque.
+Consulta de Dados:
+
+Disponibilizar consultas para visualizar todos os produtos, consultar movimentações específicas e analisar dados de estoque, facilitando a tomada de decisões.
+Resultados Esperados:
+O sistema deverá proporcionar uma gestão eficiente do inventário, reduzindo erros e melhorando a agilidade nas operações de entrada e saída de produtos. Com um banco de dados estruturado, espera-se facilitar a manutenção das informações e melhorar a eficiência operacional do armazém.
+
+# Sistema de Gestão de Inventário de Produtos
+
+Este projeto implementa um sistema para gerenciar o inventário de produtos em um armazém. O sistema permite o registro e a manutenção de informações sobre produtos, categorias e fornecedores, além de gerenciar entradas e saídas de produtos.
+
+## Estrutura do Projeto
+
+O projeto contém os seguintes arquivos:
+
+- `database.sql`: Script SQL que cria o banco de dados, tabelas e insere dados iniciais.
+- `README.md`: Documento explicativo sobre o projeto e instruções de uso.
+
+## Funcionalidades
+
+- **Cadastro de Categorias**: Permite a criação de categorias para os produtos.
+- **Cadastro de Fornecedores**: Registra informações sobre os fornecedores dos produtos.
+- **Cadastro de Produtos**: Adiciona produtos ao inventário com informações sobre preço, quantidade, categoria e fornecedor.
+- **Registro de Movimentos**: Registra entradas e saídas de produtos no armazém.
+
+## Estrutura do Banco de Dados
+
+O sistema possui quatro tabelas principais:
+
+1. **Categorias**:
+   - `ID_categoria` (INT): Identificador único da categoria.
+   - `nome` (VARCHAR): Nome da categoria.
+
+2. **Fornecedores**:
+   - `ID_fornecedor` (INT): Identificador único do fornecedor.
+   - `nome` (VARCHAR): Nome do fornecedor.
+   - `contato` (VARCHAR): Informações de contato do fornecedor.
+
+3. **Produtos**:
+   - `ID_produto` (INT): Identificador único do produto.
+   - `nome` (VARCHAR): Nome do produto.
+   - `descricao` (VARCHAR): Descrição do produto.
+   - `preco` (DECIMAL): Preço do produto.
+   - `quantidade` (INT): Quantidade disponível no estoque.
+   - `ID_categoria` (INT): Chave estrangeira para a categoria do produto.
+   - `ID_fornecedor` (INT): Chave estrangeira para o fornecedor do produto.
+
+4. **Movimentos**:
+   - `ID_movimento` (INT): Identificador único do movimento.
+   - `ID_produto` (INT): Chave estrangeira para o produto.
+   - `data_movimento` (DATETIME): Data e hora do movimento.
+   - `quantidade` (INT): Quantidade de produtos movimentados.
+   - `tipo` (ENUM): Tipo de movimento ('entrada' ou 'saida').
+
+## Como Executar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/inventario-armazem.git
+
+
+
+
+
