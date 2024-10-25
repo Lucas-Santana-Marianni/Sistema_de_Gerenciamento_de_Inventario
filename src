@@ -1,0 +1,73 @@
+-- Criação do banco de dados
+CREATE DATABASE GerenciamentoInventario;
+USE GerenciamentoInventario;
+
+-- Criação da tabela Categorias
+CREATE TABLE Categorias (
+    ID_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela Fornecedores
+CREATE TABLE Fornecedores (
+    ID_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    contato VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela Produtos com chaves estrangeiras para Categorias e Fornecedores
+CREATE TABLE Produtos (
+    ID_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(255),
+    preco DECIMAL(10, 2) NOT NULL,
+    quantidade INT NOT NULL,
+    ID_categoria INT,
+    ID_fornecedor INT,
+    FOREIGN KEY (ID_categoria) REFERENCES Categorias(ID_categoria),
+    FOREIGN KEY (ID_fornecedor) REFERENCES Fornecedores(ID_fornecedor)
+);
+
+-- Criação da tabela Movimentos para registrar entradas e saídas de produtos
+CREATE TABLE Movimentos (
+    ID_movimento INT AUTO_INCREMENT PRIMARY KEY,
+    ID_produto INT,
+    data_movimento DATETIME NOT NULL,
+    quantidade INT NOT NULL,
+    tipo ENUM('entrada', 'saida') NOT NULL,
+    FOREIGN KEY (ID_produto) REFERENCES Produtos(ID_produto)
+);
+
+-- Inserção de categorias
+INSERT INTO Categorias (nome)
+VALUES ('Eletrônicos'),
+       ('Roupas'),
+       ('Alimentos');
+
+-- Inserção de fornecedores
+INSERT INTO Fornecedores (nome, contato)
+VALUES ('Fornecedor A', 'contato@fornecedora.com'),
+       ('Fornecedor B', 'contato@fornecedorb.com');
+
+-- Inserção de produtos
+INSERT INTO Produtos (nome, descricao, preco, quantidade, ID_categoria, ID_fornecedor)
+VALUES ('Celular', 'Smartphone com tela de 6.5"', 1500.00, 50, 1, 1),
+       ('Camiseta', 'Camiseta de algodão', 30.00, 100, 2, 2),
+       ('Arroz', 'Arroz integral 5kg', 20.00, 200, 3, 2);
+
+SELECT p.ID_produto, p.nome, p.descricao, p.preco, p.quantidade, c.nome AS categoria, f.nome AS fornecedor
+FROM Produtos p
+JOIN Categorias c ON p.ID_categoria = c.ID_categoria
+JOIN Fornecedores f ON p.ID_fornecedor = f.ID_fornecedor;
+
+INSERT INTO Movimentos (ID_produto, data_movimento, quantidade, tipo)
+VALUES (1, NOW(), 20, 'entrada');  -- Adiciona 20 unidades do produto com ID 1
+
+INSERT INTO Movimentos (ID_produto, data_movimento, quantidade, tipo)
+VALUES (2, NOW(), 10, 'saida');  -- Remove 10 unidades do produto com ID 2
+
+SELECT m.ID_movimento, p.nome, m.data_movimento, m.quantidade, m.tipo
+FROM Movimentos m
+JOIN Produtos p ON m.ID_produto = p.ID_produto
+WHERE p.ID_produto = 1;  -- Altera o ID para consultar diferentes produtos
+
